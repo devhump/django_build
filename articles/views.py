@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import redirect, render
 from articles.forms import ArticleForm
 from .models import Article
@@ -27,7 +28,7 @@ def create(request):
         "article_form": article_form,
     }
 
-    return render(request, "articles/create.html", context)
+    return render(request, "articles/form.html", context)
 
 
 def detail(request, article_pk):
@@ -35,7 +36,20 @@ def detail(request, article_pk):
     article = Article.objects.get(pk=article_pk)
 
     context = {
-        'article' : article,
+        "article": article,
     }
 
     return render(request, "articles/detail.html", context)
+
+
+def update(request, article_pk):
+
+    article = Article.objects.get(pk=article_pk)
+
+    article_form = ArticleForm(instance=article)
+
+    context = {
+        "article_form": article_form,
+    }
+
+    return render(request, "articles/form.html", context)
