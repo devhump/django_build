@@ -1,8 +1,13 @@
+{% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+
 <h3>create page</h3>
+
 
 <form action="" method="POST">
   {% csrf_token %}
-  {{ article_form.as_p }}
+  {% bootstrap_form article_form %}
 
   <input type="submit" value="제출">
 </form>
