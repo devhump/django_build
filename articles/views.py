@@ -4,3 +4,7 @@ from django.shortcuts import render
 def index(request):
 
     return render(request, "articles/index.html")
+
+def create(request):
+
+    return render(request, "articles/create.html")
