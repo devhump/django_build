@@ -1,7 +1,7 @@
-from multiprocessing import context
 from django.shortcuts import redirect, render
 from articles.forms import ArticleForm
 from .models import Article
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def index(request):
@@ -15,13 +15,14 @@ def index(request):
     return render(request, "articles/index.html", context)
 
 
+@login_required
 def create(request):
 
     if request.method == "POST":
         article_form = ArticleForm(request.POST)
         if article_form.is_valid():
             article_form.save()
-            return redirect("articles:index")
+            return redirect(request.GET.get("next") or "articles:index")
     else:
         article_form = ArticleForm()
     context = {
@@ -42,6 +43,7 @@ def detail(request, article_pk):
     return render(request, "articles/detail.html", context)
 
 
+@login_required
 def update(request, article_pk):
 
     article = Article.objects.get(pk=article_pk)
@@ -60,6 +62,7 @@ def update(request, article_pk):
     return render(request, "articles/form.html", context)
 
 
+@login_required
 def delete(request, article_pk):
 
     article = Article.objects.get(pk=article_pk)
