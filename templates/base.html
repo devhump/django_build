@@ -18,18 +18,22 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+          {% comment %} 로그인 여부에 따라 분기 {% endcomment %}
+          {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link active text-warning" href="#">{{ user }}님, 안녕하세요</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-warning" href="{% url 'accounts:logout' %}">logout</a>
+          </li>
+          {% else %}
           <li class="nav-item">
             <a class="nav-link active text-warning" href="{% url 'accounts:signup' %}">signup</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active text-warning" href="{% url 'accounts:login' %}">login</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active text-warning" href="{% url 'accounts:logout' %}">logout</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active text-warning" href="#">{{ user }}님, 안녕하세요</a>
-          </li>
+          {% endif %}
         </ul>
       </div>
     </div>
