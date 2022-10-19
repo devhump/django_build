@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from articles.forms import ArticleForm
 
 # Create your views here.
 def index(request):
@@ -7,4 +8,10 @@ def index(request):
 
 def create(request):
 
-    return render(request, "articles/create.html")
+    article_form = ArticleForm()
+
+    context = {
+        'article_form':article_form,
+    }
+
+    return render(request, "articles/create.html", context)
