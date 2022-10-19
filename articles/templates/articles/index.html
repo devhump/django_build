@@ -17,7 +17,7 @@
     {% for article in articles %}
     <tr>
       <th scope="row">{{ article.pk }}</th>
-      <td>{{ article.title }}</td>
+      <td><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></td>
       <td>{{ article.created_at }}</td>
       <td>{{ article.updated_at}}</td>
     </tr>
