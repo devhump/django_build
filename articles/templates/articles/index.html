@@ -4,5 +4,26 @@
 {% block body %}
 <h3>index page</h3>
 
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">제목</th>
+      <th scope="col">내용</th>
+      <th scope="col">생성된 날짜</th>
+      <th scope="col">업데이트 날짜</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for article in articles %}
+    <tr>
+      <th scope="row">{{ article.pk }}</th>
+      <td>{{ article.title }}</td>
+      <td>{{ article.created_at }}</td>
+      <td>{{ article.updated_at}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
 <a href="{% url 'articles:create' %}">새글 생성</a>
 {% endblock %}
