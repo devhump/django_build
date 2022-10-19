@@ -1,6 +1,11 @@
+{% extends 'base.html' %}
 {% load django_bootstrap5 %}
-
 {% bootstrap_css %}
+
+
+{% block body%}
+
+
 
 <h3>create page</h3>
 
@@ -11,3 +16,6 @@
 
   <input type="submit" value="제출">
 </form>
+
+
+{% endblock %}
