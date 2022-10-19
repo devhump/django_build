@@ -1,4 +1,3 @@
-from multiprocessing import context
 from django.shortcuts import redirect, render
 
 # from django.contrib.auth.forms import UserCreationForm
@@ -57,3 +56,14 @@ def index(request):
     }
 
     return render(request, "accounts/index.html", context)
+
+
+def detail(request, user_pk):
+
+    user = get_user_model().objects.get(pk=user_pk)
+
+    context = {
+        "user": user,
+    }
+
+    return render(request, "accounts/detail.html", context)

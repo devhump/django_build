@@ -16,8 +16,7 @@
     {% for user in users %}
     <tr>
       <th scope="row">{{ user.pk }}</th>
-      {% comment %} <td><a href="{% url 'articles:detail' article.pk %}">{{ article.title }}</a></td> {% endcomment %}
-      <td>{{ user.username }}</td>
+      <td><a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a></td>
       <td>{{ user.date_joined}}</td>
     </tr>
     {% endfor %}
