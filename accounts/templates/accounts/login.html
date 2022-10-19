@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+
+{% block body %}
+
+<h3>로그인</h3>
+<form action="" method="POST">
+  {% csrf_token %}
+  {% bootstrap_form form %}
+
+  <input class="btn btn-outline-primary" type='submit' value="가입하기">
+
+</form>
+{% endblock %}
