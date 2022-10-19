@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from articles.forms import ArticleForm
 
 # Create your views here.
@@ -8,8 +8,13 @@ def index(request):
 
 def create(request):
 
-    article_form = ArticleForm()
-
+    if request.method == "POST":
+        article_form = ArticleForm(request.POST)
+        if article_form.is_valid():
+            article_form.save()
+            return redirect("articles:index")
+    else:
+        article_form = ArticleForm()
     context = {
         'article_form':article_form,
     }
