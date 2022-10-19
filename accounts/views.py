@@ -3,6 +3,7 @@ from django.shortcuts import redirect, render
 # from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as auth_login
 
 # Create your views here.
 def signup(request):
@@ -23,8 +24,13 @@ def signup(request):
 
 def login(request):
 
-    form = AuthenticationForm()
-
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect("articles:index")
+    else:
+        form = AuthenticationForm()
     context = {
         "form": form,
     }
