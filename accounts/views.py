@@ -73,20 +73,31 @@ def update(request, user_pk):
 
     user = get_user_model().objects.get(pk=user_pk)
 
-    form = CustomUserChangeForm(instance=user)
-
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=user)
+        # form = CustomUserChangeForm(data=request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:detail", user.pk)
+    else:
+        form = CustomUserChangeForm(instance=user)
     context = {
         "form": form,
     }
-
     return render(request, "accounts/update.html", context)
 
 
 # 로그인한 유저의 본인 정보 수정
 def update2(request):
 
-    form = CustomUserChangeForm(instance=request.user)
-
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        # form = CustomUserChangeForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:detail")
+    else:
+        form = CustomUserChangeForm(instance=request.user)
     context = {
         "form": form,
     }
