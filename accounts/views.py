@@ -103,3 +103,23 @@ def update2(request):
     }
 
     return render(request, "accounts/update.html", context)
+
+
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+
+
+def change_password(request):
+
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+        # form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("accounts:detail")
+    else:
+        form = PasswordChangeForm(request.user)
+    context = {
+        "form": form,
+    }
+
+    return render(request, "accounts/change_password.html", context)
