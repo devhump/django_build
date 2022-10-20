@@ -7,8 +7,8 @@
   <div class="card-body">
     <h5 class="card-title">{{ user.username }}님의 프로필입니다.</h5>
     <p class="card-text">{{ user }}</p>
-    {% comment %} <a href="{% url 'articles:update' article.pk %}" class="btn btn-outline-success">수정하기</a>
-    <a href="{% url 'articles:delete' article.pk %}" class="btn btn-outline-danger">삭제하기</a> {% endcomment %}
+    <a href="{% url 'accounts:update' user.pk %}" class="btn btn-outline-success">수정하기</a>
+    {% comment %} <a href="{% url 'articles:delete' article.pk %}" class="btn btn-outline-danger">삭제하기</a> {% endcomment %}
   </div>
 </div>
 
