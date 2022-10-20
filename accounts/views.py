@@ -58,37 +58,37 @@ def index(request):
     return render(request, "accounts/index.html", context)
 
 
-def detail(request, user_pk):
+def detail(request):
 
-    user = get_user_model().objects.get(pk=user_pk)
+    # user = get_user_model().objects.get(pk=user_pk)
 
     context = {
-        "user": user,
+        "user": request.user,
     }
     return render(request, "accounts/detail.html", context)
 
 
-# 관리자가 회원 정보 확인할 때
-def update(request, user_pk):
+# # 관리자가 회원 정보 확인할 때
+# def update(request, user_pk):
 
-    user = get_user_model().objects.get(pk=user_pk)
+#     user = get_user_model().objects.get(pk=user_pk)
 
-    if request.method == "POST":
-        form = CustomUserChangeForm(request.POST, instance=user)
-        # form = CustomUserChangeForm(data=request.POST, instance=user)
-        if form.is_valid():
-            form.save()
-            return redirect("accounts:detail", user.pk)
-    else:
-        form = CustomUserChangeForm(instance=user)
-    context = {
-        "form": form,
-    }
-    return render(request, "accounts/update.html", context)
+#     if request.method == "POST":
+#         form = CustomUserChangeForm(request.POST, instance=user)
+#         # form = CustomUserChangeForm(data=request.POST, instance=user)
+#         if form.is_valid():
+#             form.save()
+#             return redirect("accounts:detail", user.pk)
+#     else:
+#         form = CustomUserChangeForm(instance=user)
+#     context = {
+#         "form": form,
+#     }
+#     return render(request, "accounts/update.html", context)
 
 
 # 로그인한 유저의 본인 정보 수정
-def update2(request):
+def update(request):
 
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=request.user)

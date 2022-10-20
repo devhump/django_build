@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %}
 
 
 {% block body %}
@@ -16,11 +16,11 @@
     {% for user in users %}
     <tr>
       <th scope="row">{{ user.pk }}</th>
-      <td><a href="{% url 'accounts:detail' user.pk %}">{{ user.username }}</a></td>
+      <td><a href="{% url 'accounts:detail' %}">{{ user.username }}</a></td>
       <td>{{ user.date_joined}}</td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 
-{% endblock %}
+{% endblock %} {% endcomment %}

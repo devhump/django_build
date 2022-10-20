@@ -21,10 +21,13 @@
           {% comment %} 로그인 여부에 따라 분기 {% endcomment %}
           {% if request.user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link active text-warning" href="#">{{ user }}님, 안녕하세요</a>
+            <a class="nav-link active text-warning" href="{% url 'accounts:detail' %}">{{ user }}님, 안녕하세요</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active text-warning" href="{% url 'accounts:logout' %}">logout</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active text-warning" href="{% url 'accounts:detail' %}">회원정보</a>
           </li>
           {% else %}
           <li class="nav-item">
