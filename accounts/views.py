@@ -105,7 +105,7 @@ def update2(request):
     return render(request, "accounts/update.html", context)
 
 
-from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 
 def change_password(request):
@@ -115,6 +115,7 @@ def change_password(request):
         # form = PasswordChangeForm(user=request.user, data=request.POST)
         if form.is_valid():
             form.save()
+            update_session_auth_hash(request, form.user)
             return redirect("accounts:detail")
     else:
         form = PasswordChangeForm(request.user)
@@ -123,3 +124,10 @@ def change_password(request):
     }
 
     return render(request, "accounts/change_password.html", context)
+
+
+def delete(request):
+    request.user.delete()
+    auth_logout(request)
+
+    return redirect("accounts:index")
